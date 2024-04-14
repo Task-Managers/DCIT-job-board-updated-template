@@ -24,7 +24,7 @@ def initialize():
     db.create_all()
     # create_user('bob', 'bobpass')
 
-     # add in the first admin
+    # add in the first admin
     add_admin('bob', 'bobpass', 'bob@mail')
 
     # add in alumni
