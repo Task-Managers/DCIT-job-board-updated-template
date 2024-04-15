@@ -74,35 +74,19 @@
 <body>
     <div class="container">
         <h2>Company Job Application Form</h2>
-        <form action="#" method="post">
-            <!-- <div class="form-group">
-                <label for="hr_name">HR Name:</label>
-                <input type="text" id="hr_name" name="hr_name" required>
-            </div> -->
-            <div class="form-group">
-                <label for="hr_email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="company_name">Company Name:</label>
-                <input type="text" id="company_name" name="company_name" required>
-            </div>
-            <div class="form-group">
-                <label for="website">Website:</label>
-                <input type="text" id="website" name="website">
-            </div>
-            <!-- <div class="form-group">
-                <label for="company_details">Company Details:</label>
-                <textarea id="company_details" name="company_details" rows="5" required></textarea>
-            </div> -->
+        <form action="/add_listing" method="POST">
             <h3>Job Position Details</h3>
             <div class="form-group">
-                <label for="position_title">Position Title:</label>
-                <input type="text" id="position_title" name="position_title" required>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
             </div>
             <div class="form-group">
-                <label for="position_description">Position Description:</label>
-                <textarea id="position_description" name="position_description" rows="5" required></textarea>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="5" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="salary">Salary:</label>
+                <input type="number" id="salary" name="salary" required>
             </div>
             <div class="form-group">
                 <label for="position_type">Position Type:</label>

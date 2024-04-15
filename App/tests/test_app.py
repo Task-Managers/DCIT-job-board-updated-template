@@ -104,7 +104,7 @@ class UsersIntegrationTests(unittest.TestCase):
 
     # cz at the beginning so that it runs after create company
     def test_czadd_listing(self):
-        listing = add_listing('listing1', 'listing1 description', 'company1', '8000', 'Full-time', True, 'employmentterm', True, 'desiredcandidate', 'curepe')
+        listing = add_listing('listing1', 'listing1 description', 'company1', '8000', 'Full-time', True, True, 'desiredcandidate', 'curepe')
         assert listing.title == 'listing1' and listing.company_name == 'company1'
 
     def test_subscribe(self):
@@ -120,7 +120,7 @@ class UsersIntegrationTests(unittest.TestCase):
 
     def test_czapply_listing(self):
 
-        alumni = apply_listing('123456789', 'listing1')
+        alumni = apply_listing('123456789', 1)
 
         assert get_all_applicants('1')  == [get_alumni('123456789')]
 

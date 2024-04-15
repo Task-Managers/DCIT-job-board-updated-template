@@ -44,7 +44,7 @@ class Listing(db.Model):
     remote = db.Column(db.Boolean, default=False)
 
     # -employment term - string?
-    employmentterm = db.Column(db.String(120), nullable=False)
+    # employmentterm = db.Column(db.String(120), nullable=False)
 
     # -ttnational - boolean
     ttnational = db.Column(db.Boolean, default=False)
@@ -66,8 +66,15 @@ class Listing(db.Model):
     applicant = db.relationship('Alumni', secondary='alumni_listings', back_populates='listing')
     # applicants = db.relationship('Alumni', secondary=alumni_listings_association, backref='applied_listings')
 
+    # requests for deletion?
+    request = db.Column(db.String())
+
+    __table_args__ = (
+        CheckConstraint(request.in_(['Delete', 'Edit', 'None']), name = 'check_request_value'),
+    )
+
     def __init__(self, title, description, company_name, job_categories, salary,
-                position, remote, employmentterm, ttnational, desiredcandidate, area):
+                position, remote, ttnational, desiredcandidate, area):
         self.title = title
         self.description = description
         self.company_name = company_name
@@ -80,13 +87,25 @@ class Listing(db.Model):
         self.salary = salary
         self.position = position
         self.remote = remote
-        self.employmentterm = employmentterm
+        # self.employmentterm = employmentterm
         self.ttnational = ttnational
         self.desiredcandidate = desiredcandidate
         self.area = area
 
+        self.request = 'None'
+
     def get_company(self):
         return self.company_name
+    
+    # def set_request(self, request):
+
+    #     if request == 'Delete':
+    #         self.request = request
+    #     elif request == 'Edit':
+    #         self.request = request
+
+    #     else:
+    #         self.request = 'None'
 
     # methods to support adding, removing, validating the job categories
     def validate_and_set_categories(self, job_categories):
@@ -130,7 +149,7 @@ class Listing(db.Model):
             'salary':self.salary,
             'position':self.position,
             'remote':self.remote,
-            'employmentterm':self.employmentterm,
+            # 'employmentterm':self.employmentterm,
             'ttnational':self.ttnational,
             'desiredcandidate':self.desiredcandidate,
             'area':self.area,

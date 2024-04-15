@@ -1,4 +1,4 @@
-from App.models import User, Admin, Alumni, Company
+from App.models import User, Admin, Alumni, Company, Listing
 from App.database import db
 
 # create and add a new admin into the db
@@ -26,6 +26,20 @@ def add_admin(username, password, email):
             db.session.rollback()
             return None
 
+def delete_listing(listing_id):
+    from .listing import get_listing
+
+    listing = get_listing(listing_id)
+
+    if listing is not None:
+        db.session.delete(listing)
+        db.session.commit()
+        return True
+
+    return None
+    
+
+
 def get_all_admins():
     return db.session.query(Admin).all()
 
@@ -36,6 +50,29 @@ def get_all_admins_json():
     admins = [admin.get_json() for admin in admins]
     return admins
 
-# delete other users
+# delete other listings
+def delete_listing(listing_id):
+    from .listing import get_listing
 
-# edit other users
+    listing = get_listing(listing_id)
+
+    if listing is not None:
+        db.session.delete(listing)
+        db.session.commit()
+        return True
+
+    return None
+
+# def delete_exerciseSet(exerciseSet_id):
+
+#     exerciseSets = ExerciseSet.query.filter_by(id=exerciseSet_id).all()
+
+#     if exerciseSets is not None:
+#         for exerciseSet in exerciseSets:
+#             db.session.delete(exerciseSet)
+        
+#             db.session.commit()
+#         return True
+#     return None
+
+# edit other listings

@@ -57,7 +57,7 @@ def send_notification(job_categories=None):
     return notif_alumni, job_categories
 
 def add_listing(title, description, company_name, #, job_categories=None
-                salary, position, remote, employmentterm, ttnational, desiredcandidate, area, job_categories=None):
+                salary, position, remote, ttnational, desiredcandidate, area, job_categories=None):
 
     # manually validate that the company actually exists
     company = get_company_by_name(company_name)
@@ -65,7 +65,7 @@ def add_listing(title, description, company_name, #, job_categories=None
         return None
 
     newListing = Listing(title, description, company_name, job_categories,
-                         salary, position, remote, employmentterm, ttnational, desiredcandidate, area)
+                         salary, position, remote, ttnational, desiredcandidate, area)
     try:
         db.session.add(newListing)
         db.session.commit()
