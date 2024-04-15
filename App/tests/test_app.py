@@ -120,7 +120,7 @@ class UsersIntegrationTests(unittest.TestCase):
 
     def test_czapply_listing(self):
 
-        alumni = apply_listing('123456789', 'listing1')
+        alumni = apply_listing('123456789', 1)
 
         assert get_all_applicants('1')  == [get_alumni('123456789')]
 

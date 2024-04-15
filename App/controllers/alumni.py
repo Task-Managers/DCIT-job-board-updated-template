@@ -93,17 +93,20 @@ def remove_categories(alumni_id, job_categories):
         return None
 
 # apply to an application
-def apply_listing(alumni_id, listing_title):
-    from App.controllers import get_listing_title
+# def apply_listing(alumni_id, listing_title):
+def apply_listing(alumni_id, listing_id):
+    from App.controllers import get_listing_title, get_listing
 
     alumni = get_alumni(alumni_id)
 
     # error check to see if alumni exists
     if alumni is None:
+        # print('is none')
         return None
 
     # get the listing and then company that made the listing
-    listing = get_listing_title(listing_title)
+    # listing = get_listing_title(listing_title)
+    listing = get_listing(listing_id)
 
     if listing is None:
         return None

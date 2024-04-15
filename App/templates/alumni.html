@@ -340,15 +340,18 @@
                 <p>Employment Term: {{ job.employmentterm }}</p>
                 <p>Must Be a TT National: {{ job.ttnational }}</p>
                 <p>Category: {{ job.job_category }}</p>
-                <p>Desired Candidate Type: {{ job.candidatetype }}</p>
-                
-                {% endfor %}
-
-                <h2>Interested? Cick here to <a href="#" id="applyBtn">apply!</a></h2>
-                <div class="popup-form hidden" id="form-popup">
-                    <div class="popup-content">
+                <p>Desired Candidate Type: {{ job.desiredcandidate }}</p>
+                <h2>Interested? Click here to <a href="#" class="applyBtn" data-popup-id="form-popup-{{ job.id }}">apply!</a></h2>                
+            </div>
+        </div>
+        <div class="popup-form hidden" id="form-popup-{{ job.id }}">                    
+            <div class="popup-content">
                         <button class="close-btn" id="closeFormBtn">x</button>
-                        <form action="#" method="POST">
+                        <form action="/submit_application" method="POST">
+
+                            <!-- Add a hidden input field to store the job ID -->
+                            <input type="hidden" name="job_id" value="{{ job.id }}">
+
                             <div class="form-group">
                             <label for="full_name">Full Name:</label>
                             <input type="text" id="full_name" name="full_name" required>
@@ -370,31 +373,31 @@
                             <label for="phone">Phone Number:</label>
                             <input type="tel" id="phone" name="phone" required>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="resume">Resume (PDF):</label>
                             <input type="file" id="resume" name="resume" accept=".pdf" required>
                         </div>
                         <div class="form-group">
                             <label for="cover_letter">Cover Letter (PDF):</label>
                             <input type="file" id="cover_letter" name="cover_letter" accept=".pdf" required>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <input type="submit" value="Submit Application">
                         </div>
                         </form>
                     </div>
                 </div>
+                {% endfor%}
             </div>
         </div>       
     </div>
     <script>
-   document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function() {
     const jobCards = document.querySelectorAll('.job_card');
     const searchInput = document.getElementById('searchInput');
     const expandBtns = document.querySelectorAll('.expand-btn');
-    const applyBtn = document.getElementById('applyBtn'); // Add this line
-    const closeFormBtn = document.getElementById('closeFormBtn'); // Add this line
-
+    const applyBtns = document.querySelectorAll('.applyBtn'); // Select all apply buttons
+    const closeFormBtns = document.querySelectorAll('.close-btn'); // Select all close buttons
 
     expandBtns.forEach((expandBtn) => {
         expandBtn.addEventListener('click', function() {
@@ -403,24 +406,39 @@
         });
     });
 
-    // Function to toggle form popup visibility
-    function toggleFormPopup() {
-        const formPopup = document.getElementById('form-popup');
-        formPopup.classList.toggle('hidden'); // Toggle the 'hidden' class
+    applyBtns.forEach((applyBtn) => {
+        applyBtn.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+            const popupId = applyBtn.getAttribute('data-popup-id'); // Get the popup ID from data-popup-id attribute
+            toggleFormPopup(popupId); // Toggle form popup visibility
+        });
+    });
+
+    closeFormBtns.forEach((closeFormBtn) => {
+        closeFormBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            const popupId = closeFormBtn.parentElement.parentElement.id; // Get the popup ID from parent element's ID
+            toggleFormPopup(popupId); // Toggle form popup visibility
+        });
+    });
+
+    // Function to toggle job details visibility
+    function toggleJobDetails(jobDetails, expandBtn) {
+        if (jobDetails.style.display === 'none' || jobDetails.style.display === '') {
+            jobDetails.style.display = 'block';
+            expandBtn.textContent = '▲'; // Change arrow direction
+        } else {
+            jobDetails.style.display = 'none';
+            expandBtn.textContent = '▼'; // Change arrow direction
+        }
     }
 
-    // Add this event listener
-    applyBtn.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default link behavior
-        toggleFormPopup(); // Toggle form popup visibility
-    });
-
-    closeFormBtn.addEventListener('click', function(event) {
-        event.preventDefault();
-        toggleFormPopup(); // Toggle form popup visibility
-    });
+    // Function to toggle form popup visibility
+    function toggleFormPopup(popupId) {
+        const formPopup = document.getElementById(popupId);
+        formPopup.classList.toggle('hidden'); // Toggle the 'hidden' class
+    }
 });
-
 
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -444,20 +462,25 @@
         }
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-    const expandBtn = document.querySelector('.expand-btn');
-    const jobDetails = document.querySelector('.job-details');
+//     document.addEventListener('DOMContentLoaded', () => {
+//     const expandBtns = document.querySelectorAll('.expand-btn');
 
-    expandBtn.addEventListener('click', () => {
-        if (jobDetails.style.display === 'none' || jobDetails.style.display === '') {
-            jobDetails.style.display = 'block';
-            expandBtn.textContent = '▲'; // Change arrow direction
-        } else {
-            jobDetails.style.display = 'none';
-            expandBtn.textContent = '▼'; // Change arrow direction
-        }
-    });
-});
+//     expandBtns.forEach(expandBtn => {
+//         expandBtn.addEventListener('click', () => {
+//             const jobDetails = expandBtn.parentElement.nextElementSibling;
+            
+//             if (jobDetails.style.display === 'none' || jobDetails.style.display === '') {
+//                 jobDetails.style.display = 'block';
+//                 expandBtn.textContent = '▲'; // Change arrow direction
+//             } else {
+//                 jobDetails.style.display = 'none';
+//                 expandBtn.textContent = '▼'; // Change arrow direction
+//             }
+//         });
+//     });
+// });
+
+
 
     document.addEventListener("DOMContentLoaded", function() {
         const subpopup = document.getElementById("subpopup");
