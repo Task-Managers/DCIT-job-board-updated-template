@@ -67,7 +67,7 @@
             cursor: pointer;
         }
 
-        .add-job-button {
+        .addJob {
             position: absolute;
             top: 20px;
             right: 100px;
@@ -78,15 +78,15 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .add-job-button:hover, .logout:hover {
+        .addjob:hover, .logout:hover {
             background-color: rgb(98, 127, 191);
         }
     </style>
 </head>
 <header>
     <h2>Job Listings</h2>
-    <button class="add-job-button"><a href="/add_listing"> Add Job</a></button>
-    <button class="logout"><a href="/logout"></a>Logout</button>
+    <a href="/add_listing" class="addJob"> Add Job</a>
+    <a href="/logout" class="logout">Logout</a>
 </header>
 <body>
     <div class="container">
@@ -103,44 +103,13 @@
             <p>Desired Candidate Type: {{ job.desiredcandidate }}</p>
             <p>Test for job request: {{ job.request }}</p>
             <div class="job-actions">
-                <button class="viewapp">
                     <a href="/view_applications/{{job.id}}">View Applicants</a>
                     <!-- <input type="hidden" name="job_id" value="{{ job.id }}"> -->
-                </button>
-                <button>
-                    <a href="/request_edit_listing/{{job.id}}"></a>Request Edits
-                </button>
-                <button class="request-deletion-btn" onclick="confirmDeletion(this)">
-                    <a href="/request_delete_listing/{{job.id}}"></a>Request Deletion
-                </button>
+                    <a href="/request_edit_listing/{{job.id}}">Request Edits</a>
+                    <a href="/request_delete_listing/{{job.id}}">Request Deletion</a>
             </div>
         </div>
         {% endfor %}
     </div>
-
-
-<script>
-function confirmDeletion(button) {
-    var confirmation = confirm("Are you sure you want to request deletion?");
-    if (confirmation) {
-        button.innerText = "Request for Deletion Submitted";
-        if (!button.hasAttribute('data-cancel-added')) {
-            var cancelButton = document.createElement("button");
-            cancelButton.innerText = "Cancel";
-            cancelButton.onclick = function() {
-                cancelDeletion(button);
-            };
-            button.parentNode.appendChild(cancelButton);
-            button.setAttribute('data-cancel-added', 'true');
-        }
-    }
-}
-
-function cancelDeletion(button) {
-    button.innerText = "Request Deletion";
-    button.parentNode.removeChild(button.nextSibling);
-    button.removeAttribute('data-cancel-added');
-}
-</script>
 </body>
 </html>

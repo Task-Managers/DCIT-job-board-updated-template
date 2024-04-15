@@ -33,6 +33,17 @@
         <div class="forms-container">
             <div class="form" id="login-form">
                 <h2>Login</h2>
+                <div id="flash-messages">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </div>
                 <form method="POST" action="/login">
                     <!-- csrf token -->
                     <!-- <input type="hidden" name="csrf_token" value="csrf_token()"/> -->
@@ -150,6 +161,14 @@
             companyForm.classList.add('hidden');
             loginForm.classList.remove('hidden');
         })
+    // Hide flash messages after 5 seconds
+        setTimeout(() => {
+            const flashMessages = document.getElementById('flash-messages');
+            if (flashMessages) {
+                flashMessages.style.display = 'none';
+            }
+        }, 5000);  // 5000 milliseconds = 5 seconds
+
     </script>
 </body>
 </html>
