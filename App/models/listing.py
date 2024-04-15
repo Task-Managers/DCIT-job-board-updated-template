@@ -44,7 +44,7 @@ class Listing(db.Model):
     remote = db.Column(db.Boolean, default=False)
 
     # -employment term - string?
-    employmentterm = db.Column(db.String(120), nullable=False)
+    # employmentterm = db.Column(db.String(120), nullable=False)
 
     # -ttnational - boolean
     ttnational = db.Column(db.Boolean, default=False)
@@ -67,7 +67,7 @@ class Listing(db.Model):
     # applicants = db.relationship('Alumni', secondary=alumni_listings_association, backref='applied_listings')
 
     def __init__(self, title, description, company_name, job_categories, salary,
-                position, remote, employmentterm, ttnational, desiredcandidate, area):
+                position, remote, ttnational, desiredcandidate, area):
         self.title = title
         self.description = description
         self.company_name = company_name
@@ -80,7 +80,7 @@ class Listing(db.Model):
         self.salary = salary
         self.position = position
         self.remote = remote
-        self.employmentterm = employmentterm
+        # self.employmentterm = employmentterm
         self.ttnational = ttnational
         self.desiredcandidate = desiredcandidate
         self.area = area
@@ -130,7 +130,7 @@ class Listing(db.Model):
             'salary':self.salary,
             'position':self.position,
             'remote':self.remote,
-            'employmentterm':self.employmentterm,
+            # 'employmentterm':self.employmentterm,
             'ttnational':self.ttnational,
             'desiredcandidate':self.desiredcandidate,
             'area':self.area,

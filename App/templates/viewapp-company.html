@@ -78,7 +78,7 @@
 </head>
 <header>
     <h2>Applications</h2>
-    <button class="button"><a href="company-view.html" style="text-decoration: none; color: inherit"> Job Listings</a></button>
+    <button class="button"><a href="/app" style="text-decoration: none; color: inherit"> Job Listings</a></button>
     <button class="logout">Logout</button>
 </header>
 <body>
@@ -87,7 +87,9 @@
         <table>
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Username</th>
+                    <th>First name</th>
+                    <th>Last name</th>
                     <th>Contact</th>
                     <th>Resume</th>
                     <th>Cover Letter</th>
@@ -96,10 +98,12 @@
             <tbody>
                 {% for applicant in applicants %}
                 <tr>
-                    <td>{{ applicant.name }}</td>
+                    <td>{{ applicant.username }}</td>
+                    <td>{{ applicant.firstname }}</td>
+                    <td>{{ applicant.lastname }}</td>
                     <td>{{ applicant.contact }}</td>
-                    <td><a href="{{ applicant.resume }}" target="_blank">Download</a></td>
-                    <td><a href="{{ applicant.cover_letter }}" target="_blank">Download</a></td>
+                    <!-- <td><a href="applicant.resume " target="_blank">Download</a></td>
+                    <td><a href="applicant.cover_letter " target="_blank">Download</a></td> -->
                 </tr>
                 {% endfor %}
             </tbody>

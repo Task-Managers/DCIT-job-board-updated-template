@@ -113,10 +113,10 @@
             {% for job in jobs %}
             <tbody>
                 <tr>
-                    <td>{{ job.company }}</td>
+                    <td>{{ job.company_name }}</td>
                     <td>{{ job.title }}</td>
                     <td>{{ job.description }}</td>
-                    <td>{{ job. requests }}</td>
+                    <td>{{ job.requests }}</td>
                     <td class="actions">
                         <button onclick="editListing(0)">Edit</button>
                         <button class="publish-button" onclick="togglePublish(0)">Publish</button>

@@ -85,8 +85,8 @@
 </head>
 <header>
     <h2>Job Listings</h2>
-    <button class="add-job-button"><a href="companyform.html"> Add Job</a></button>
-    <button class="logout">Logout</button>
+    <button class="add-job-button"><a href="/add_listing"> Add Job</a></button>
+    <button class="logout"><a href="/logout"></a>Logout</button>
 </header>
 <body>
     <div class="container">
@@ -97,14 +97,14 @@
             <p>Description: {{ job.description }}</p>
             <p>Position Type: {{ job.position_type }}</p>
             <p>Remote: {{ job.remote }}</p>
-            <p>Employment Term: {{ job.employment_term }}</p>
+            <!-- <p>Employment Term: {{ job.employment_term }}</p> -->
             <p>Must Be a TT National: {{ job.tt_national }}</p>
-            <p>Category: {{ job.category }}</p>
+            <p>Category: {{ job.job_category }}</p>
             <p>Desired Candidate Type: {{ job.desiredcandidate }}</p>
             <div class="job-actions">
                 <button class="viewapp">
-                    <a href="/view_applications">View Applicants</a>
-                    <input type="hidden" name="job_id" value="{{ job.id }}">
+                    <a href="/view_applications/{{job.id}}">View Applicants</a>
+                    <!-- <input type="hidden" name="job_id" value="{{ job.id }}"> -->
                 </button>
                 <button>Request Edits</button>
                 <button class="request-deletion-btn" onclick="confirmDeletion(this)">Request Deletion</button>
