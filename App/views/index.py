@@ -78,69 +78,70 @@ def submit_application_action():
     # print('testttt')
     # print(data)
 
-@index_views.route('/view_applications/<int:job_id>', methods=['GET'])
-@jwt_required()
-def view_applications_page(job_id):
+# @index_views.route('/view_applications/<int:job_id>', methods=['GET'])
+# @jwt_required()
+# def view_applications_page(job_id):
 
-    # get the listing
-    listing = get_listing(job_id)
+#     # get the listing
+#     listing = get_listing(job_id)
 
-    # applicants = listing.get_applicants()
+#     # applicants = listing.get_applicants()
 
-    response = None
-    print(listing)
+#     response = None
+#     print(listing)
 
-    try:
-        applicants = listing.get_applicants()
-        print(applicants)
-        return render_template('viewapp-company.html', applicants=applicants)
+#     try:
+#         applicants = listing.get_applicants()
+#         print(applicants)
+#         return render_template('viewapp-company.html', applicants=applicants)
 
-    except Exception:
-        flash('Error receiving applicants')
-        response = redirect(url_for('index_views.index_page'))
+#     except Exception:
+#         flash('Error receiving applicants')
+#         response = redirect(url_for('index_views.index_page'))
 
-    return response
+#     return response
 
-@index_views.route('/add_listing', methods=['GET'])
-@jwt_required()
-def add_listing_page():
-    # username = get_jwt_identity()
-    # user = get_user_by_username(username)
+# @index_views.route('/add_listing', methods=['GET'])
+# @jwt_required()
+# def add_listing_page():
+#     # username = get_jwt_identity()
+#     # user = get_user_by_username(username)
 
-    return render_template('companyform.html')
+#     return render_template('companyform.html')
 
-@index_views.route('/add_listing', methods=['POST'])
-@jwt_required()
-def add_listing_action():
-    # username = get_jwt_identity()
-    # user = get_user_by_username(username)
-    data = request.form
+# @index_views.route('/add_listing', methods=['POST'])
+# @jwt_required()
+# def add_listing_action():
+#     # username = get_jwt_identity()
+#     # user = get_user_by_username(username)
+#     data = request.form
 
-    response = None
+#     response = None
 
-    print(data)
+#     print(data)
 
-    try:
-        remote = False
-        national = False
+#     try:
+#         remote = False
+#         national = False
 
-        if data['remote_option'] == 'Yes':
-            remote = True
+#         if data['remote_option'] == 'Yes':
+#             remote = True
 
-        if data['national_tt'] == 'Yes':
-            national = True
+#         if data['national_tt'] == 'Yes':
+#             national = True
 
-        listing = add_listing(data['title'], data['description'], current_user.company_name, data['salary'], data['position_type'],
-                              remote, national, data['desired_candidate_type'], data['job_area'], None)
-        print(listing)
-        flash('Created job listing')
-        response = redirect(url_for('index_views.index_page'))
-    except Exception:
-        flash('Error creating listing')
-        response = redirect(url_for('index_views.add_listing_page'))
+#         listing = add_listing(data['title'], data['description'], current_user.company_name, data['salary'], data['position_type'],
+#                               remote, national, data['desired_candidate_type'], data['job_area'], None)
+#         print(listing)
+#         flash('Created job listing')
+#         response = redirect(url_for('index_views.index_page'))
+#     except Exception:
+#         flash('Error creating listing')
+#         response = redirect(url_for('index_views.add_listing_page'))
     
+#     return response
 
-    return response
+
 
 # @index_views.route('/delete-exercise/<int:exercise_id>', methods=['GET'])
 # @login_required

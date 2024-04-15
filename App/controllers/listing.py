@@ -3,6 +3,21 @@ from App.database import db
 
 # add in getters, maybe put setters in company controllers
 
+def set_request(id, request):
+    listing = get_listing(id)
+
+    if listing:
+        if request == 'Delete':
+           listing.request = request
+        elif request == 'Edit':
+           listing.request = request
+        else:
+            listing.request = 'None'
+        db.session.add(listing)
+        db.session.commit()
+
+    return listing
+
 def get_listing(id):
     return Listing.query.filter_by(id=id).first()
 

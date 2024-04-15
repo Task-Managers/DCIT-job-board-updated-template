@@ -116,11 +116,13 @@
                     <td>{{ job.company_name }}</td>
                     <td>{{ job.title }}</td>
                     <td>{{ job.description }}</td>
-                    <td>{{ job.requests }}</td>
+                    <td>{{ job.request }}</td>
                     <td class="actions">
                         <button onclick="editListing(0)">Edit</button>
+                        <button>
+                            <a href="/delete_listing/{{job.id}}">test</a>Delete
+                        </button>
                         <button class="publish-button" onclick="togglePublish(0)">Publish</button>
-
                     </td>
                 </tr>
             </tbody>

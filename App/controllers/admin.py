@@ -1,4 +1,4 @@
-from App.models import User, Admin, Alumni, Company
+from App.models import User, Admin, Alumni, Company, Listing
 from App.database import db
 
 # create and add a new admin into the db
@@ -25,6 +25,20 @@ def add_admin(username, password, email):
         except:
             db.session.rollback()
             return None
+
+def delete_listing(listing_id):
+    from .listing import get_listing
+
+    listing = get_listing(listing_id)
+
+    if listing is not None:
+        db.session.delete(listing)
+        db.session.commit()
+        return True
+
+    return None
+    
+
 
 def get_all_admins():
     return db.session.query(Admin).all()

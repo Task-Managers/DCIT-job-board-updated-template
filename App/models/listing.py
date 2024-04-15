@@ -66,6 +66,13 @@ class Listing(db.Model):
     applicant = db.relationship('Alumni', secondary='alumni_listings', back_populates='listing')
     # applicants = db.relationship('Alumni', secondary=alumni_listings_association, backref='applied_listings')
 
+    # requests for deletion?
+    request = db.Column(db.String())
+
+    __table_args__ = (
+        CheckConstraint(request.in_(['Delete', 'Edit', 'None']), name = 'check_request_value'),
+    )
+
     def __init__(self, title, description, company_name, job_categories, salary,
                 position, remote, ttnational, desiredcandidate, area):
         self.title = title
@@ -85,8 +92,20 @@ class Listing(db.Model):
         self.desiredcandidate = desiredcandidate
         self.area = area
 
+        self.request = 'None'
+
     def get_company(self):
         return self.company_name
+    
+    # def set_request(self, request):
+
+    #     if request == 'Delete':
+    #         self.request = request
+    #     elif request == 'Edit':
+    #         self.request = request
+
+    #     else:
+    #         self.request = 'None'
 
     # methods to support adding, removing, validating the job categories
     def validate_and_set_categories(self, job_categories):

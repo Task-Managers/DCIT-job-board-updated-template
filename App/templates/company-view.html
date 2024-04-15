@@ -95,19 +95,24 @@
             <h3>{{ job.company }}</h3>
             <h4>{{ job.title }}</h4>
             <p>Description: {{ job.description }}</p>
-            <p>Position Type: {{ job.position_type }}</p>
+            <p>Position Type: {{ job.position }}</p>
             <p>Remote: {{ job.remote }}</p>
             <!-- <p>Employment Term: {{ job.employment_term }}</p> -->
-            <p>Must Be a TT National: {{ job.tt_national }}</p>
+            <p>Must Be a TT National: {{ job.ttnational }}</p>
             <p>Category: {{ job.job_category }}</p>
             <p>Desired Candidate Type: {{ job.desiredcandidate }}</p>
+            <p>Test for job request: {{ job.request }}</p>
             <div class="job-actions">
                 <button class="viewapp">
                     <a href="/view_applications/{{job.id}}">View Applicants</a>
                     <!-- <input type="hidden" name="job_id" value="{{ job.id }}"> -->
                 </button>
-                <button>Request Edits</button>
-                <button class="request-deletion-btn" onclick="confirmDeletion(this)">Request Deletion</button>
+                <button>
+                    <a href="/request_edit_listing/{{job.id}}"></a>Request Edits
+                </button>
+                <button class="request-deletion-btn" onclick="confirmDeletion(this)">
+                    <a href="/request_delete_listing/{{job.id}}"></a>Request Deletion
+                </button>
             </div>
         </div>
         {% endfor %}
