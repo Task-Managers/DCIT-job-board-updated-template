@@ -48,11 +48,11 @@ def login_action():
   response = redirect(request.referrer)
   
   if token:
-    flash('Logged in successfully.')  # send message to next page
+    flash('Logged in successfully.', 'success')  # send message to next page
     response = redirect(url_for('index_views.index_page'))
     set_access_cookies(response, token)
   else:
-    flash('Invalid username or password'), 401  # send message to next page
+    flash('Invalid username or password', 'unsuccessful'), 401  # send message to next page
 
 #   csrf_token = generate_csrf()
 #   response.headers["X-CSRF-TOKEN"] = csrf_token
